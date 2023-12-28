@@ -69,33 +69,47 @@ class Game():
         return [qy,qx]
          
          
-    def draw(self, znak='#', error=None):
+    def draw(self, error=None):
             os.system('cls')
-            if error == 1:
-                print("Cordinates are out of range!")
-            if error == 2:
-                print("This place is taken!")
-            print("Tic Tac Toe")
-            print(" 1 2 3")
-            row = ''.join([znak for i in range(5)])
-            row = ' ' + row
-            temp = ''
+            drawtable = [[],[],[]]
             for y in range(3):
-                print(y+1, end='')
                 for x in range(3):
-                    if self.table[y][x] == None: temp = ' '
-                    elif self.table[y][x] == 0: temp = 'O'
-                    else: temp = 'X'
-                    print(temp,end='')
-                    if x == 2: break
-                    print(znak,end='')
-                if y == 2: break
-                print('\n', row, sep='') 
+                    if self.table[y][x] == None:
+                        drawtable[y].append(' ')
+                    elif self.table[y][x] == 1:
+                        drawtable[y].append('X')
+                    else:
+                        drawtable[y].append('O')
+            draw = [
+               ["    ",drawtable[0][0]," │ ",drawtable[0][1]," │ ",drawtable[0][2]," "],
+               ["   ───┼───┼───"],
+               ["    ",drawtable[1][0]," │ ",drawtable[1][1]," │ ",drawtable[1][2]," "],
+               ["   ───┼───┼───"],
+               ["    ",drawtable[2][0]," │ ",drawtable[2][1]," │ ",drawtable[2][2]," "],
+               ["\n"]
+            ]
+            print("+----------------------+")
+            print("| Tic Tac Toe by Artur |")
+            print("+----------------------+")
+            print('\n\n')
+            for t in draw:
+                row = ''.join(t)
+                print(row)
+           
+           
+            
+
+            if error == 1:
+                print("\n\nCordinates are out of range!")
+            if error == 2:
+                print("\n\nThis place is taken!")
+            if error == None:
+                print("\n\n")
             if self.NumberOfPlayer == 2:
                 if self.CurrentPlayerTurn == 1:
-                    print("\n\nPlayer X move")
+                    print("Player X move")
                 if self.CurrentPlayerTurn == 0:
-                    print("\n\nPlayer O move")
+                    print("Player O move")
             else: 
                 if self.CurrentPlayerTurn == 1: 
                     print("\n\nPlayer X move")
