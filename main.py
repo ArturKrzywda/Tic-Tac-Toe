@@ -6,7 +6,7 @@
 
 import Bot
 import Game
-
+print("Test gitignore")
 def main():
     b = Bot.Bot()
     g = Game.Game()
