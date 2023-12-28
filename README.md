@@ -1,1 +1,1 @@
-#Tic Tac Toe by Artur
+Tic Tac Toe by Artur
