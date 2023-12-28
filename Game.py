@@ -28,7 +28,7 @@ class Game():
          if self.isWin() == 1: return 1
          if self.isWin() == 0: return 0
          if self.istie(): return 3
-         return 0
+         return 
     
     def move(self, b):
          if self.NumberOfPlayer == 2:
@@ -101,48 +101,53 @@ class Game():
                     print("\n\nPlayer X move")
 
     def run(self, b):
-        print("Tic Tac Toe by arturek9")
-        while True:
-            try:
-                self.NumberOfPlayer = int(input("Game for 1 or 2 Player? 1/2\n>"))
-                if self.NumberOfPlayer == 1 or self.NumberOfPlayer == 2: break
-                os.system('cls')
-                print("Wrong number of players!")
-            except:
-                os.system('cls')
-                print("Wrong value!")
-            
-            
+        try:
+            print("Tic Tac Toe by arturek9")
+            while True:
+                try:
+                    self.NumberOfPlayer = int(input("Game for 1 or 2 Player? 1/2\n>"))
+                    if self.NumberOfPlayer == 1 or self.NumberOfPlayer == 2: break
+                    os.system('cls')
+                    print("Wrong number of players!")
+                except:
+                    os.system('cls')
+                    print("Wrong value!")
+                
+                
 
-        self.reset()
-        while True:
+            self.reset()
             while True:
-                self.draw()
-                self.move(b)
-                if self.check() != 0:
-                    if self.check == 1: 
-                        if self.NumberOfPlayer == 0:
-                            os.system('cls')
-                            print("Bot Win!")
+                while True:
+                    self.draw()
+                    self.move(b)
+                    if self.check() != 0:
+                        if self.check == 1: 
+                            if self.NumberOfPlayer == 1:
+                              #  os.system('cls')
+                                print("Bot Win!")
+                                break
+                            else:
+                              #  os.system('cls')
+                                print("Player O Win!")
+                                break
+                        if self.check == 1: 
+                           # os.system('cls')
+                            print("Player X Win!")
                             break
-                        else:
-                            os.system('cls')
-                            print("Player O Win!")
+                        if self.check == 2: 
+                           # os.system('cls')
+                            print("Tie!")
                             break
-                    if self.check == 1: 
-                        os.system('cls')
-                        print("Player X Win!")
-                        break
-                    if self.check == 2: 
-                        os.system('cls')
-                        print("Tie!")
-                        break
-            while True:
-                q = input("Would you like to play another game? Y/N").lower()
-                if q == 'y' or q == 'n': break
-                print("Wrong input!")
-            if q == 'n':
-                exit()
+                while True:
+                    q = input("Would you like to play another game? Y/N").lower()
+                    if q == 'y' or q == 'n': break
+                    print("Wrong input!")
+                if q == 'n':
+                    exit()
+        except KeyboardInterrupt:
+            os.system('cls')
+            print("Game closed by user")
+            exit()
 
 
         
