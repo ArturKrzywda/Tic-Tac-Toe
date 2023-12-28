@@ -1,9 +1,7 @@
 #Do zrobienia:
 #-Napisanie Bota
 #-Napisanie funkcji sprawdziającej wygraną
-#-Naprawienie funkcji sprawdzającej remis
-#-Zrobienie bezpiecznika w player move żeby nie dało się dać innego typu niż int
-#-Naprawienie spacji w czsie błędu
+#main task=>-Naprawienie funkcji sprawdzającej remis
 #-Dodoanie __pycache__ do .gitignore
 
 
@@ -18,3 +16,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+ 
