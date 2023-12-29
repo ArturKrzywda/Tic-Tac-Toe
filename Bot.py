@@ -1,5 +1,6 @@
 import random
 #funkcja move zwraca kordynaty [y,x]
+#Algorytm MinMax
 class Bot():
     def __init__(self):
         pass
