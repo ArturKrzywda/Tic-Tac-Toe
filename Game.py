@@ -1,12 +1,10 @@
 import os
+from sys import exit
     #X = 1
     #O = 0
     #table[y][x] ZAPAMIENTAC!
 class Game():
-#Do usunecia bo do testowania były
-    scan = 0
-    pr = 0
-####
+
     def __init__(self):
         self.CurrentPlayerTurn = 1
         self.NumberOfPlayer = 0
@@ -153,25 +151,27 @@ class Game():
             while True:
                 self.draw()
                 self.move(b)
-                if self.check() != False: #To to wogóle od nowa chyba trzeba napisac bo nie dziala
-                    if self.check == 2: 
+                check = self.check()
+                if check != False: #To to wogóle od nowa chyba trzeba napisac bo nie dziala
+                    if check == 2: 
                         if self.NumberOfPlayer == 1:
-                          #  os.system('cls')
-                            print("Bot Win!")
+                            os.system('cls')
+                            input("Bot Win!\nPress Enter to continue\n")
                             break
                         else:
-                          #  os.system('cls')
-                            print("Player O Win!")
+                            os.system('cls')
+                            input("Player O Win!\nPress Enter to continue\n")
                             break
-                    if self.check == 1: 
-                        # os.system('cls')
-                        print("Player X Win!")
+                    if check == 1: 
+                        os.system('cls')
+                        input("Player X Win!\nPress Enter to continue\n")
                         break
-                    if self.check == 3: 
-                       # os.system('cls')
-                        print("Tie!")
+                    if check == 3: 
+                        os.system('cls')
+                        input("Tie!\nPress Enter to continue\n")
                         break
-            while True: # Tu jest coś popierdolone
+            while True: 
+
                 q = input("Would you like to play another game? Y/N\n>").lower()
                 if q == 'y' or q == 'n': 
                     if q == 'n':
