@@ -38,8 +38,7 @@ class Game():
         for y  in range(3):
              for x in range(3):
                   if self.table[y][x] == None: 
-                      return False
-        print("tie w funkcji")          
+                      return False          
         return True
 
     def isWin(self):
@@ -120,10 +119,7 @@ class Game():
             print("+----------------------+")
             print("| Tic Tac Toe by Artur |")
             print("+----------------------+\n")
-           #Do testowania czy Tie działa 
-            print(self.scan)
-            if self.pr == 1: print("tie w funkcji")
-           ####
+
             for t in draw:
                 row = ''.join(t)
                 print(row)
