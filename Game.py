@@ -37,7 +37,7 @@ class Game():
              for x in range(3):
                   if self.table[y][x] == None: 
                       return False
-        print("tie w funkcji")          
+
         return True
 
     def isWin(self):

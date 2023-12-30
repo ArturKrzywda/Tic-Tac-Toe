@@ -1,4 +1,5 @@
 import random
+#MinMax algorytm
 class Bot():
     def __init__(self):
         pass
