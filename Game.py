@@ -1,8 +1,10 @@
 import os
-class Game():
+from sys import exit
     #X = 1
     #O = 0
     #table[y][x] ZAPAMIENTAC!
+class Game():
+
     def __init__(self):
         self.CurrentPlayerTurn = 1
         self.NumberOfPlayer = 0
@@ -32,22 +34,22 @@ class Game():
                 exit()
             self.reset(error=2)
    
-    def istie(self):
+    def istie(self): #Funkcja działa poprawnie
         for y  in range(3):
              for x in range(3):
                   if self.table[y][x] == None: 
                       return False
-
+        print("tie w funkcji")          
         return True
 
     def isWin(self):
          pass
     
-    def check(self):
-         if self.isWin() == 1: return 1
-         if self.isWin() == 0: return 0
-         if self.istie(): return 3
-         return 
+    def check(self): #Zwraca dobrze return 3
+         if self.isWin() == 1: return 1 #X win
+         if self.isWin() == 0: return 2 #O win
+         if self.istie(): return 3 # Tie
+         return False
     
     def move(self, b):
          if self.NumberOfPlayer == 2:
@@ -118,7 +120,10 @@ class Game():
             print("+----------------------+")
             print("| Tic Tac Toe by Artur |")
             print("+----------------------+\n")
-            
+           #Do testowania czy Tie działa 
+            print(self.scan)
+            if self.pr == 1: print("tie w funkcji")
+           ####
             for t in draw:
                 row = ''.join(t)
                 print(row)
@@ -145,33 +150,37 @@ class Game():
         try:
             self.reset()
             while True:
-                while True:
-                    self.draw()
-                    self.move(b)
-                    if self.check() != 0:
-                        if self.check == 1: 
-                            if self.NumberOfPlayer == 1:
-                              #  os.system('cls')
-                                print("Bot Win!")
-                                break
-                            else:
-                              #  os.system('cls')
-                                print("Player O Win!")
-                                break
-                        if self.check == 1: 
-                           # os.system('cls')
-                            print("Player X Win!")
+                self.draw()
+                self.move(b)
+                check = self.check()
+                if check != False: #To to wogóle od nowa chyba trzeba napisac bo nie dziala
+                    if check == 2: 
+                        if self.NumberOfPlayer == 1:
+                            os.system('cls')
+                            input("Bot Win!\nPress Enter to continue\n")
                             break
-                        if self.check == 2: 
-                           # os.system('cls')
-                            print("Tie!")
+                        else:
+                            os.system('cls')
+                            input("Player O Win!\nPress Enter to continue\n")
                             break
-                while True:
-                    q = input("Would you like to play another game? Y/N").lower()
-                    if q == 'y' or q == 'n': break
-                    print("Wrong input!")
-                if q == 'n':
-                    exit()
+                    if check == 1: 
+                        os.system('cls')
+                        input("Player X Win!\nPress Enter to continue\n")
+                        break
+                    if check == 3: 
+                        os.system('cls')
+                        input("Tie!\nPress Enter to continue\n")
+                        break
+            while True: 
+
+                q = input("Would you like to play another game? Y/N\n>").lower()
+                if q == 'y' or q == 'n': 
+                    if q == 'n':
+                        exit()
+                    else: 
+                        self.run(b)
+                        break
+                print("Wrong input!")
         except KeyboardInterrupt:
             os.system('cls')
             print("Game closed by user")

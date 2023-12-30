@@ -1,9 +1,8 @@
 import random
-#MinMax algorytm
 class Bot():
     def __init__(self):
         pass
-    def move(self, table):
+    def move(self, table, difficulty=None):
         while True:
             y = random.randint(0,2)
             x = random.randint(0,2)
