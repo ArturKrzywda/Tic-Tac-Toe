@@ -42,6 +42,7 @@ class Game():
         return True
 
     def isWin(self):
+        z = 1
         wintable = (((1,1),(2,1),(3,1)), #1
                      ((1,2),(2,2),(3,2)), #2
                      ((1,3),(2,3),(3,3)), #3
@@ -56,9 +57,9 @@ class Game():
                 if self.table[y[0]][y[1]] == None:
                     break
                 z += self.table[y[0]][y[1]]
-            if z == 3:
+            if z == 4:
                 return 1
-            if z == 0:
+            if z == 1:
                 return 0
 
     
