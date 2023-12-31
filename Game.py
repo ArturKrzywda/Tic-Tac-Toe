@@ -42,7 +42,7 @@ class Game():
         return True
 
     def isWin(self):
-         wintable = (((1,1),(2,1),(3,1)), #1
+        wintable = (((1,1),(2,1),(3,1)), #1
                      ((1,2),(2,2),(3,2)), #2
                      ((1,3),(2,3),(3,3)), #3
                      ((1,1),(1,2),(1,3)), #4
@@ -51,6 +51,16 @@ class Game():
                      ((1,1),(2,2),(3,3)), #7
                      ((1,3),(2,2),(3,1)), #8
                      )
+        for i in wintable:
+            for y in i:
+                if self.table[y[0]][y[1]] == None:
+                    break
+                z += self.table[y[0]][y[1]]
+            if z == 3:
+                return 1
+            if z == 0:
+                return 0
+
     
     def check(self): #Zwraca dobrze return 3
          if self.isWin() == 1: return 1 #X win
