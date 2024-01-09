@@ -1,5 +1,10 @@
 import os
 from sys import exit
+import ctypes  # An included library with Python install.
+
+def Mbox(text, title="Error", style=0): #For debbuging
+    return ctypes.windll.user32.MessageBoxW(0, text, title, style)
+
     #X = 1
     #O = 0
     #table[y][x] ZAPAMIENTAC!
@@ -40,9 +45,12 @@ class Game():
                   if self.table[y][x] == None: 
                       return False          
         return True
-
+    def sum(self, t):
+        suma = 0
+        for element in t:
+            suma += element
+        return suma
     def isWin(self):
-        z = 1
         wintable = (((1,1),(2,1),(3,1)), #1
                      ((1,2),(2,2),(3,2)), #2
                      ((1,3),(2,3),(3,3)), #3
@@ -52,16 +60,20 @@ class Game():
                      ((1,1),(2,2),(3,3)), #7
                      ((1,3),(2,2),(3,1)), #8
                      )
-        for i in wintable:
+        for i in wintable: #zadzialalow!!
+            score = []     #(1,1)X i (1,2)O = O wins?!
             for y in i:
-                if self.table[y[0]][y[1]] == None:
+                if self.table[y[0]-1][y[1]-1] == None: #jesli 0 jest pierwsze to zwraca O win
                     break
-                z += self.table[y[0]][y[1]]
-            if z == 4:
-                return 1
-            if z == 1:
-                return 0
-
+                score.append(self.table[y[0]-1][y[1]-1])
+            if len(score) == 3:
+                sum = self.sum(score)
+                if sum == 0: #Wykonuje się 2 razy
+                    #Mbox(str(i))
+                    return 0
+                if sum == 3: 
+                    #Mbox(str(i))
+                    return 1
     
     def check(self): #Zwraca dobrze return 3
          if self.isWin() == 1: return 1 #X win
@@ -115,7 +127,7 @@ class Game():
         return [qy,qx]
          
          
-    def draw(self, error=None):
+    def draw(self, error=None, check = False):
             os.system('cls')
             drawtable = [[],[],[]]
             for y in range(3):
@@ -143,54 +155,54 @@ class Game():
                 row = ''.join(t)
                 print(row)
             
-
-            if error == 1:
-                print("Cordinates are out of range!")
-            if error == 2:
-                print("This place is taken!")
-            if error == 3:
-                print("Wrong value!")
-            if error == None:
-                print()
-            if self.NumberOfPlayer == 2:
-                if self.CurrentPlayerTurn == 1:
-                    print("Player X move")
-                if self.CurrentPlayerTurn == 0:
-                    print("Player O move")
-            else: 
-                if self.CurrentPlayerTurn == 1: 
-                    print("Player X move")
+            if check: 
+                if check == 2: 
+                    if self.NumberOfPlayer == 1:
+                            os.system('cls')
+                            input("Bot Win!\nPress Enter to continue\n")
+                    else:
+                            os.system('cls')
+                            input("Player O Win!\nPress Enter to continue\n")
+                if check == 1: 
+                    os.system('cls')
+                    input("Player X Win!\nPress Enter to continue\n")
+                if check == 3:                         
+                    os.system('cls')
+                    input("Tie!\nPress Enter to continue\n")
+            else:
+                if error == 1:
+                    print("Cordinates are out of range!")
+                if error == 2:
+                    print("This place is taken!")
+                if error == 3:
+                    print("Wrong value!")
+                if error == None:
+                    print()
+                if self.NumberOfPlayer == 2:
+                    if self.CurrentPlayerTurn == 1:
+                        print("Player X move")
+                    if self.CurrentPlayerTurn == 0:
+                        print("Player O move")
+                else: 
+                    if self.CurrentPlayerTurn == 1: 
+                        print("Player X move")
 
     def run(self, b):
         try:
             self.reset()
             while True:
-                self.draw()
-                self.move(b)
                 check = self.check()
+                self.draw(check=check)
                 if check != False: #To to wogóle od nowa chyba trzeba napisac bo nie dziala
-                    if check == 2: 
-                        if self.NumberOfPlayer == 1:
-                            os.system('cls')
-                            input("Bot Win!\nPress Enter to continue\n")
-                            break
-                        else:
-                            os.system('cls')
-                            input("Player O Win!\nPress Enter to continue\n")
-                            break
-                    if check == 1: 
-                        os.system('cls')
-                        input("Player X Win!\nPress Enter to continue\n")
-                        break
-                    if check == 3: 
-                        os.system('cls')
-                        input("Tie!\nPress Enter to continue\n")
-                        break
+                    break
+                self.move(b)
+                
             while True: 
 
                 q = input("Would you like to play another game? Y/N\n>").lower()
                 if q == 'y' or q == 'n': 
                     if q == 'n':
+                        os.system('cls')
                         exit()
                     else: 
                         self.run(b)
