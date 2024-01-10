@@ -1,4 +1,5 @@
 import os
+import titles
 from sys import exit
 import ctypes  # An included library with Python install.
 
@@ -158,17 +159,17 @@ class Game():
             if check: 
                 if check == 2: 
                     if self.NumberOfPlayer == 1:
-                            os.system('cls')
-                            input("Bot Win!\nPress Enter to continue\n")
+                            titles.pbw()
+                            input("\nPress Enter to continue\n")
                     else:
-                            os.system('cls')
-                            input("Player O Win!\nPress Enter to continue\n")
+                            titles.pp2w()
+                            input("\nPress Enter to continue\n")
                 if check == 1: 
-                    os.system('cls')
-                    input("Player X Win!\nPress Enter to continue\n")
-                if check == 3:                         
-                    os.system('cls')
-                    input("Tie!\nPress Enter to continue\n")
+                    titles.pp1w()
+                    input("\nPress Enter to continue\n")
+                if check == 3:   
+                    titles.ptie()                      
+                    input("\nPress Enter to continue\n")
             else:
                 if error == 1:
                     print("Cordinates are out of range!")
@@ -193,12 +194,12 @@ class Game():
             while True:
                 check = self.check()
                 self.draw(check=check)
-                if check != False: #To to wogóle od nowa chyba trzeba napisac bo nie dziala
+                if check != False: 
                     break
                 self.move(b)
                 
             while True: 
-
+                os.system('cls')
                 q = input("Would you like to play another game? Y/N\n>").lower()
                 if q == 'y' or q == 'n': 
                     if q == 'n':
