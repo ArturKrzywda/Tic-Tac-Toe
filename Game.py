@@ -5,7 +5,6 @@ import ctypes  # An included library with Python install.
 
 def Mbox(text, title="Error", style=0): #For debbuging
     return ctypes.windll.user32.MessageBoxW(0, text, title, style)
-
     #X = 1
     #O = 0
     #table[y][x] ZAPAMIENTAC!
@@ -70,13 +69,11 @@ class Game():
             if len(score) == 3:
                 sum = self.sum(score)
                 if sum == 0: #Wykonuje się 2 razy
-                    #Mbox(str(i))
                     return 0
                 if sum == 3: 
-                    #Mbox(str(i))
                     return 1
     
-    def check(self): #Zwraca dobrze return 3
+    def check(self): 
          if self.isWin() == 1: return 1 #X win
          if self.isWin() == 0: return 2 #O win
          if self.istie(): return 3 # Tie
@@ -122,6 +119,7 @@ class Game():
                         else: break
             except Exception as e:
                 if e == KeyboardInterrupt:
+                    os.system('cls')
                     print("Game closed by user")
                     exit()
                 self.draw(error=3)
